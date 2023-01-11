@@ -1,0 +1,19 @@
+.drop-target {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding: calc(1em - 2px);
+  border: 2px solid black;
+  background-color: #dddddd;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: default;
+  user-select: none;
+}
+
+.drop-target-live {
+  color: red;
+  padding: calc(1em - 5px);
+  border: 5px solid red;
+  background-color: #ffdddd;
+}
