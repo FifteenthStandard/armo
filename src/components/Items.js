@@ -1,5 +1,7 @@
 import ContainedButton from './Input/ContainedButton.js';
 import FloatingActionButton from './Input/FloatingActionButton.js';
+import BigSmallColumns from './Layout/BigSmallColumns.js';
+import ThreeSmallColumns from './Layout/ThreeSmallColumns.js';
 import MdBox from './Layout/MdBox.js';
 import Stack from './Layout/Stack.js';
 import AppBar from './Surfaces/AppBar.js';
@@ -14,6 +16,8 @@ import ShareSpeedDialAction from './Navigation/ShareSpeedDialAction';
 const items = {
   '/Inputs/ContainedButton': (props) => <ContainedButton {...props} />,
   '/Inputs/Fab': (props) => <FloatingActionButton {...props} />,
+  '/Layout/BigSmallColumns': (props) => <BigSmallColumns {...props} />,
+  '/Layout/ThreeSmallColumns': (props) => <ThreeSmallColumns {...props} />,
   '/Layout/MdBox': (props) => <MdBox {...props} />,
   '/Layout/Stack': (props) => <Stack {...props} />,
   '/Surfaces/AppBar': (props) => <AppBar {...props} />,

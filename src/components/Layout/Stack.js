@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function BasicStack(props) {
   const { live, preview } = props;
   return (
-    <Box sx={{ width: '100%', height: '100%', my: 2 }}>
+    <Box sx={{ width: '100%', height: '100%' }}>
       <Stack spacing={2}>
         {
           preview

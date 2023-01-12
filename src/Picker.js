@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import TextField from '@mui/material/TextField';
 
 import items from './components/Items.js';
 
@@ -20,20 +21,33 @@ function draggable(id) {
 
 export default function Picker() {
   const [mode, setMode] = useState('edit');
-  const handleChange = (_, mode) => {
+  const handleChangeMode = (_, mode) => {
     if (mode) setMode(mode);
     window.opener.postMessage({ live: mode === 'live'})
   };
+  const [primary, setPrimary] = useState('');
+  const handleChangePrimary = ev => {
+    const primary = ev.target.value;
+    setPrimary(primary);
+    if (primary.length === 7) {
+      window.opener.postMessage({ primary });
+    }
+    if (primary.length === 0) {
+      window.opener.postMessage({ primary: '#1976d2' });
+    }
+  }
   return <>
     <ToggleButtonGroup
       color="primary"
       value={mode}
       exclusive
-      onChange={handleChange}
+      onChange={handleChangeMode}
     >
       <ToggleButton value="edit">Edit</ToggleButton>
       <ToggleButton value="live">Live</ToggleButton>
     </ToggleButtonGroup>
+    <br />
+    <TextField label="Primary" variant="standard" value={primary} onChange={handleChangePrimary} />
     <table width="100%">
       <tbody width="100%">
         {
