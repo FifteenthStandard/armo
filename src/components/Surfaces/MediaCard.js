@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
@@ -38,9 +39,25 @@ export default function ActionAreaCard(props) {
       onDrop: imageDrop,
     };
 
+  const [url, setUrl] = React.useState(null);
+  const urlDragOver = ev => {
+    ev.preventDefault();
+    ev.dataTransfer.dropEffect = 'copy';
+  }
+  const urlDrop = ev => {
+    ev.preventDefault();
+    setUrl(ev.dataTransfer.getData('text/plain'));
+  };
+  const urlDrag = live || preview
+    ? {}
+    : {
+      onDragOver: urlDragOver,
+      onDrop: urlDrop,
+    };
+
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea component={Link} href={url} {...urlDrag}>
         <CardMedia
           component="img"
           height="140"
