@@ -7,7 +7,7 @@ import SingleDropTarget from './components/SingleDropTarget';
 
 export default function Home() {
   useEffect(() => {
-    window.open('/picker', 'picker', { popup: true });
+    window.open('/armo/picker', 'picker', { popup: true });
   }, []);
   useEffect(() => {
     window.addEventListener('message', function (ev) {
