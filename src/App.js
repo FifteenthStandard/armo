@@ -30,7 +30,7 @@ export default function App() {
   });
 
   return <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename='/armo'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/picker" element={<Picker />} />
