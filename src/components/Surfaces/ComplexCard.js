@@ -157,7 +157,7 @@ export default function RecipeReviewCard(props) {
     };
 
   return (
-    <Card>
+    <Card sx={preview && { maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" contentEditable={canEdit}>

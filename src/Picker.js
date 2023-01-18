@@ -48,14 +48,13 @@ export default function Picker() {
     </ToggleButtonGroup>
     <br />
     <TextField label="Primary" variant="standard" value={primary} onChange={handleChangePrimary} />
-    <table width="100%">
+    <table width="100%" className="component-list">
       <tbody width="100%">
         {
           Object.keys(items)
             .map((key, ind) => {
               const item = items[key]({ preview: true });
               return <tr key={ind} {...draggable(key)}>
-                <td>{key}</td>
                 <td>{item}</td>
               </tr>;
             })

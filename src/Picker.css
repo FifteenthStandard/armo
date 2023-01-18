@@ -1,3 +1,21 @@
 body {
   background-color: #f2f1f1;
 }
+
+.component-list {
+  border-collapse: collapse;
+}
+
+.component-list td {
+  padding: 10px 5px;
+}
+
+.component-list tr:nth-child(even) {
+  background-color: #e2e1e1;
+}
+
+.component-list td:hover {
+  background-color: #f2f1f2;
+  padding-top: 5px;
+  padding-bottom: 15px;
+}

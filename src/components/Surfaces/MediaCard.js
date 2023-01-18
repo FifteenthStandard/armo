@@ -56,7 +56,7 @@ export default function ActionAreaCard(props) {
     };
 
   return (
-    <Card>
+    <Card sx={preview && { maxWidth: 345 }}>
       <CardActionArea component={Link} href={url} {...urlDrag}>
         <CardMedia
           component="img"
