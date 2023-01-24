@@ -22,7 +22,8 @@ function draggable(id) {
 export default function Picker() {
   const [mode, setMode] = useState('edit');
   const handleChangeMode = (_, mode) => {
-    if (mode) setMode(mode);
+    if (!mode) return;
+    setMode(mode);
     window.opener.postMessage({ live: mode === 'live'})
   };
   const [primary, setPrimary] = useState('');

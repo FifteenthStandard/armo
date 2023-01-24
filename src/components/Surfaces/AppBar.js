@@ -28,6 +28,7 @@ const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
+    height: '100%',
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -96,7 +97,7 @@ export default function PersistentDrawerLeft(props) {
   };
 
   return (
-    <Box sx={{ display: 'flex', height: '100%', position: 'relative', backgroundColor: '#E7EBF0' }}>
+    <Box sx={{ display: 'flex', minHeight: '100%', position: 'relative', backgroundColor: '#E7EBF0' }}>
       <CssBaseline />
       <AppBar position={picker ? "absolute" : "fixed"} open={open}>
         <Toolbar>
