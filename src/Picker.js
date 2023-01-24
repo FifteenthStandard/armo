@@ -53,7 +53,7 @@ export default function Picker() {
         {
           Object.keys(items)
             .map((key, ind) => {
-              const item = items[key]({ preview: true });
+              const item = items[key]({ picker: true });
               return <tr key={ind} {...draggable(key)}>
                 <td>{item}</td>
               </tr>;

@@ -16,7 +16,5 @@ export default function Home() {
     });
   });
   const [live, setLive] = useState(false);
-  return <>
-    <SingleDropTarget live={live} />
-  </>;
+  return <SingleDropTarget live={live} />;
 };

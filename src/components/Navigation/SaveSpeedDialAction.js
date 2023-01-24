@@ -3,8 +3,8 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import SaveIcon from '@mui/icons-material/Save';
 
 export default function SaveSpeedDialAction(props) {
-  const { preview } = props;
-  const open = preview
+  const { picker } = props;
+  const open = picker
     ? { open: true }
     : {};
   return (

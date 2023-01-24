@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-import SingleDropTarget from '../SingleDropTarget.js';
+import { singleDroppable } from '../../Armo.js';
 
 export default function SimplePaper(props) {
-  const { live, preview } = props;
+  const { picker } = props;
 
   return (
     <Box
@@ -15,17 +15,13 @@ export default function SimplePaper(props) {
         flexWrap: 'wrap',
         '& > :not(style)': {
           m: 1,
-          width: preview ? 128 : '100%',
-          height: preview ? 128 : '100%',
+          width: picker ? 128 : '100%',
+          height: picker ? 128 : '100%',
         },
       }}
     >
       <Paper>
-        {
-          preview
-            ? <Typography sx={{ padding: '1em', textAlign: 'center' }}>Content goes here</Typography>
-            : <SingleDropTarget live={live} />
-        }
+        {singleDroppable(props, <Typography sx={{ padding: '1em', textAlign: 'center' }}>Content goes here</Typography>)}
       </Paper>
     </Box>
   );

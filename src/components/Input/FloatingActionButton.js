@@ -3,8 +3,8 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 
 export default function FloatingActionButton(props) {
-  const { preview } = props;
-  const style = preview
+  const { picker } = props;
+  const style = picker
     ? {}
     : { position: 'fixed', right: 20, bottom: 20, zIndex: 1000 };
   return (

@@ -11,6 +11,8 @@ import ShareSpeedDialAction from './ShareSpeedDialAction.js';
 
 import items from '../Items.js';
 
+import { dropTarget } from '../../Armo.js';
+
 const actions = [
   <CopySpeedDialAction />,
   <PrintSpeedDialAction />,
@@ -19,33 +21,24 @@ const actions = [
 ];
 
 export default function BasicSpeedDial(props) {
-  const { live, preview } = props;
-  const style = preview
+  const { live, picker } = props;
+  const style = picker
     ? {}
     : { position: 'absolute', bottom: 16, right: 16 };
   const [elems, setElems] = useState([]);
-  const dragTarget = preview || live
-    ? {}
-    : {
-        onDragOver: ev => {
-          ev.preventDefault();
-          ev.dataTransfer.dropEffect = 'copy';
-        },
-        onDrop: ev => {
-          ev.preventDefault();
-          const data = ev.dataTransfer.getData('text/plain');
-          setElems(elems => [...elems, data]);
-        }
-      }
+  const onDrop = ev => {
+    const data = ev.dataTransfer.getData('text/plain');
+    setElems(elems => [...elems, data]);
+  };
   return (
       <SpeedDial
-        {...dragTarget}
+        {...dropTarget(props, onDrop, '')}
         ariaLabel="SpeedDial basic example"
         sx={style}
         icon={<SpeedDialIcon />}
       >
         {
-          preview
+          picker
             ? actions
             : elems.map(elem => items[elem]({ live }))
         }

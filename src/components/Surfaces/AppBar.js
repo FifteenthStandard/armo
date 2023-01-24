@@ -22,7 +22,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
-import SingleDropTarget from '../SingleDropTarget.js';
+import { editable, singleDroppable } from '../../Armo.js';
 
 const drawerWidth = 240;
 
@@ -72,8 +72,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft(props) {
-  const { live, preview } = props;
-  const canEdit = !live && !preview;
+  const { picker } = props;
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -99,7 +98,7 @@ export default function PersistentDrawerLeft(props) {
   return (
     <Box sx={{ display: 'flex', height: '100%', position: 'relative', backgroundColor: '#E7EBF0' }}>
       <CssBaseline />
-      <AppBar position={preview ? "absolute" : "fixed"} open={open}>
+      <AppBar position={picker ? "absolute" : "fixed"} open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -110,7 +109,7 @@ export default function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }} contentEditable={canEdit}>
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }} {...editable(props)}>
             My App
           </Typography>
           <IconButton
@@ -156,7 +155,7 @@ export default function PersistentDrawerLeft(props) {
             position: 'absolute',
           }
         }}
-        className="preview"
+        className="picker"
         variant="persistent"
         anchor="left"
         open={open}
@@ -195,11 +194,7 @@ export default function PersistentDrawerLeft(props) {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {
-          preview
-            ? <Typography>Content goes here</Typography>
-            : <SingleDropTarget live={live} />
-        }
+        {singleDroppable(props, <Typography>Content goes here</Typography>)}
       </Main>
     </Box>
   );

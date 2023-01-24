@@ -22,6 +22,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
+import { dropTarget, editable } from '../../Armo.js';
+
 import './Card.css';
 
 const ExpandMore = styled((props) => {
@@ -109,8 +111,7 @@ function CustomizedMenus(props) {
 };
 
 export default function RecipeReviewCard(props) {
-  const { live, preview } = props;
-  const canEdit = !live && !preview;
+  const { picker } = props;
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -128,17 +129,7 @@ export default function RecipeReviewCard(props) {
   };
 
   const [image, setImage] = React.useState('https://mui.com/static/images/cards/paella.jpg');
-  const imageDragOver = ev => {
-    ev.preventDefault();
-    ev.dataTransfer.dropEffect = 'copy';
-    ev.target.classList.add('image-drop-target-live');
-  }
-  const imageDragLeave = ev => {
-    ev.target.classList.remove('image-drop-target-live');
-  };
   const imageDrop = ev => {
-    ev.preventDefault();
-    ev.target.classList.remove('image-drop-target-live');
     if (ev.dataTransfer.files) {
       var file = ev.dataTransfer.files[0];
       var reader = new FileReader();
@@ -148,19 +139,12 @@ export default function RecipeReviewCard(props) {
       reader.readAsDataURL(file);
     }
   };
-  const imageDrag = live || preview
-    ? {}
-    : {
-      onDragOver: imageDragOver,
-      onDragLeave: imageDragLeave,
-      onDrop: imageDrop,
-    };
 
   return (
-    <Card sx={preview && { maxWidth: 345 }}>
+    <Card sx={picker && { maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" contentEditable={canEdit}>
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" {...editable(props)}>
             R
           </Avatar>
         }
@@ -180,18 +164,18 @@ export default function RecipeReviewCard(props) {
             <CustomizedMenus handleClose={handleClose} anchorEl={anchorEl} open={open} />
           </>
         }
-        title={<span contentEditable={canEdit}>Shrimp and Chorizo Paella</span>}
-        subheader={<span contentEditable={canEdit}>September 14, 2016</span>}
+        title={<span {...editable(props)}>Shrimp and Chorizo Paella</span>}
+        subheader={<span {...editable(props)}>September 14, 2016</span>}
       />
       <CardMedia
         component="img"
         height="194"
         image={image}
-        {...imageDrag}
+        {...dropTarget(props, imageDrop, 'image-drop-target-live')}
         alt="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary" contentEditable={canEdit}>
+        <Typography variant="body2" color="text.secondary" {...editable(props)}>
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the mussels,
           if you like.
@@ -215,7 +199,7 @@ export default function RecipeReviewCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph contentEditable={canEdit}>
+          <Typography paragraph {...editable(props)}>
             Method:
             <br /><br />
             Heat 1/2 cup of the broth in a pot until simmering, add saffron and set

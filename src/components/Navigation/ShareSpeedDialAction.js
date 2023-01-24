@@ -3,8 +3,8 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import ShareIcon from '@mui/icons-material/Share';
 
 export default function ShareSpeedDialAction(props) {
-  const { preview } = props;
-  const open = preview
+  const { picker } = props;
+  const open = picker
     ? { open: true }
     : {};
   return (

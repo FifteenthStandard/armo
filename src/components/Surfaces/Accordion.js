@@ -5,10 +5,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-export default function SimpleAccordion(props) {
-  const { live, preview } = props;
-  const canEdit = !live && !preview;
+import { editable } from '../../Armo.js';
 
+export default function SimpleAccordion(props) {
   return (
     <div>
       <Accordion>
@@ -17,10 +16,10 @@ export default function SimpleAccordion(props) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography contentEditable={canEdit}>Accordion 1</Typography>
+          <Typography {...editable(props)}>Accordion 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography contentEditable={canEdit}>
+          <Typography {...editable(props)}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
@@ -32,10 +31,10 @@ export default function SimpleAccordion(props) {
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography contentEditable={canEdit}>Accordion 2</Typography>
+          <Typography {...editable(props)}>Accordion 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography contentEditable={canEdit}>
+          <Typography {...editable(props)}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget.
           </Typography>
@@ -47,7 +46,7 @@ export default function SimpleAccordion(props) {
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
-          <Typography contentEditable={canEdit}>Disabled Accordion</Typography>
+          <Typography {...editable(props)}>Disabled Accordion</Typography>
         </AccordionSummary>
       </Accordion>
     </div>

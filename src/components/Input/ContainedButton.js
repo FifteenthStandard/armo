@@ -2,11 +2,11 @@ import {
   Button,
 } from '@mui/material';
 
+import { editable } from '../../Armo.js';
+
 export default function ContainedButton(props) {
-  const { live, preview } = props;
-  const canEdit = !live && !preview;
   return (
-    <Button variant="contained" contentEditable={canEdit}>
+    <Button variant="contained" {...editable(props)}>
       Contained
     </Button>
   );

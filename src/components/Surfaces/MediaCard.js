@@ -6,22 +6,13 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
+import { dropTarget, editable } from '../../Armo.js';
+
 export default function ActionAreaCard(props) {
-  const { live, preview } = props;
-  const canEdit = !live && !preview;
+  const { picker } = props;
 
   const [image, setImage] = React.useState('https://mui.com/static/images/cards/contemplative-reptile.jpg');
-  const imageDragOver = ev => {
-    ev.preventDefault();
-    ev.dataTransfer.dropEffect = 'copy';
-    ev.target.classList.add('image-drop-target-live');
-  }
-  const imageDragLeave = ev => {
-    ev.target.classList.remove('image-drop-target-live');
-  };
   const imageDrop = ev => {
-    ev.preventDefault();
-    ev.target.classList.remove('image-drop-target-live');
     if (ev.dataTransfer.files) {
       var file = ev.dataTransfer.files[0];
       var reader = new FileReader();
@@ -31,45 +22,27 @@ export default function ActionAreaCard(props) {
       reader.readAsDataURL(file);
     }
   };
-  const imageDrag = live || preview
-    ? {}
-    : {
-      onDragOver: imageDragOver,
-      onDragLeave: imageDragLeave,
-      onDrop: imageDrop,
-    };
 
   const [url, setUrl] = React.useState(null);
-  const urlDragOver = ev => {
-    ev.preventDefault();
-    ev.dataTransfer.dropEffect = 'copy';
-  }
   const urlDrop = ev => {
-    ev.preventDefault();
     setUrl(ev.dataTransfer.getData('text/plain'));
   };
-  const urlDrag = live || preview
-    ? {}
-    : {
-      onDragOver: urlDragOver,
-      onDrop: urlDrop,
-    };
 
   return (
-    <Card sx={preview && { maxWidth: 345 }}>
-      <CardActionArea component={Link} href={url} {...urlDrag}>
+    <Card sx={picker && { maxWidth: 345 }}>
+      <CardActionArea component={Link} href={url} {...dropTarget(props, urlDrop, '')}>
         <CardMedia
           component="img"
           height="140"
           image={image}
-          {...imageDrag}
+          {...dropTarget(props, imageDrop, 'image-drop-target-live')}
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" contentEditable={canEdit}>
+          <Typography gutterBottom variant="h5" component="div" {...editable(props)}>
             Lizard
           </Typography>
-          <Typography variant="body2" color="text.secondary" contentEditable={canEdit}>
+          <Typography variant="body2" color="text.secondary" {...editable(props)}>
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species, ranging across all continents except Antarctica
           </Typography>

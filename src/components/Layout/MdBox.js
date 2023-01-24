@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-import SingleDropTarget from '../SingleDropTarget';
+import { singleDroppable } from '../../Armo.js';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,14 +16,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function BoxSx(props) {
-  const { live, preview } = props;
   return (
     <Box sx={{ width: '900px', margin: 'auto' }}>
-      {
-        preview
-          ? <Item>Centered column limited to 900px wide</Item>
-          : <SingleDropTarget live={live} />
-      }
+      {singleDroppable(props, <Item>Centered column limited to 900px wide</Item>)}
     </Box>
   );
 };

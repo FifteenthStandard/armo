@@ -3,8 +3,8 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 
 export default function CopySpeedDialAction(props) {
-  const { preview } = props;
-  const open = preview
+  const { picker } = props;
+  const open = picker
     ? { open: true }
     : {};
   return (

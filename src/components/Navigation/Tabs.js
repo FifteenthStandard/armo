@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import SingleDropTarget from '../SingleDropTarget.js';
+import { editable, singleDroppable } from '../../Armo.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -39,9 +39,6 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs(props) {
-  const { preview, live } = props;
-  const canEdit = !live && !preview;
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -53,31 +50,19 @@ export default function BasicTabs(props) {
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label={<span contentEditable={canEdit}>Item One</span>} {...a11yProps(0)} />
-          <Tab label={<span contentEditable={canEdit}>Item Two</span>} {...a11yProps(1)} />
-          <Tab label={<span contentEditable={canEdit}>Item Three</span>} {...a11yProps(2)} />
+          <Tab label={<span {...editable(props)}>Item One</span>} {...a11yProps(0)} />
+          <Tab label={<span {...editable(props)}>Item Two</span>} {...a11yProps(1)} />
+          <Tab label={<span {...editable(props)}>Item Three</span>} {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {
-          preview
-            ? 'Item One'
-            : <SingleDropTarget live={live} />
-        }
+        {singleDroppable(props, 'Item One')}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {
-          preview
-            ? 'Item Three'
-            : <SingleDropTarget live={live} />
-        }
+        {singleDroppable(props, 'Item Two')}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {
-          preview
-            ? 'Item Three'
-            : <SingleDropTarget live={live} />
-        }
+        {singleDroppable(props, 'Item Three')}
       </TabPanel>
     </Box>
   );
